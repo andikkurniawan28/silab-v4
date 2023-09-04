@@ -21,7 +21,7 @@
             <form action="{{ route("analisa_ari.update", $analisa_ari->id) }}" method="post">
                 @csrf
                 @method("PUT")
-                <input type="hidden" name="brix" value="{{ $analisa_ari->brix }}" readonly>
+                <input type="hidden" name="pbrix" value="{{ $analisa_ari->pbrix }}" readonly>
                 <p>
                     <label>{{ ucfirst("rendemen") }}</label>
                     <input type="number" step="any" class="form-control" name="rendemen" value="{{ $analisa_ari->rendemen }}" min="4" max="23" required>

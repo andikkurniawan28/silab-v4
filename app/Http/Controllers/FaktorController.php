@@ -48,10 +48,10 @@ class FaktorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Faktor  $rendemenNppAcuan
+     * @param  \App\Models\Faktor  $faktor
      * @return \Illuminate\Http\Response
      */
-    public function show(Faktor $rendemenNppAcuan)
+    public function show(Faktor $faktor)
     {
         //
     }
@@ -59,10 +59,10 @@ class FaktorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Faktor  $rendemenNppAcuan
+     * @param  \App\Models\Faktor  $faktor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Faktor $rendemenNppAcuan)
+    public function edit(Faktor $faktor)
     {
         //
     }
@@ -71,10 +71,10 @@ class FaktorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Faktor  $rendemenNppAcuan
+     * @param  \App\Models\Faktor  $faktor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faktor $rendemenNppAcuan)
+    public function update(Request $request, Faktor $faktor)
     {
         //
     }
@@ -82,10 +82,10 @@ class FaktorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Faktor  $rendemenNppAcuan
+     * @param  \App\Models\Faktor  $faktor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Faktor $rendemenNppAcuan)
+    public function destroy(Faktor $faktor)
     {
         //
     }

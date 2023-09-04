@@ -21,7 +21,7 @@
             <form action="{{ route("analisa_core.update", $analisa_core->id) }}" method="post">
                 @csrf
                 @method("PUT")
-                <input type="hidden" name="brix" value="{{ $analisa_core->brix }}" readonly>
+                <input type="hidden" name="pbrix" value="{{ $analisa_core->pbrix }}" readonly>
                 <p>
                     <label>{{ ucfirst("rendemen") }}</label>
                     <input type="number" step="any" class="form-control" name="rendemen" value="{{ $analisa_core->rendemen }}" min="4" max="23" required>

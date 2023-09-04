@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained();
             $table->foreignId("analisa_posbrix_id")->unique()->constrained();
-            $table->float("brix")->nullable();
+            $table->float("pbrix")->nullable();
+            $table->float("ppol")->nullable();
             $table->float("pol")->nullable();
             $table->float("rendemen")->nullable();
             $table->timestamp("created_at")->useCurrent();

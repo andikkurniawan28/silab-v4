@@ -72,8 +72,8 @@
                                 <td>{{ $data->analisa_posbrix->kud->name ?? "" }}</td>
                                 <td>{{ $data->analisa_posbrix->pospantau->name ?? "" }}</td>
                                 <td>{{ $data->analisa_posbrix->wilayah->name ?? "" }}</td>
-                                <td>{{ $data->brix ?? "" }}</td>
-                                <td>{{ $data->pol ?? "" }}</td>
+                                <td>{{ $data->pbrix ?? "" }}</td>
+                                <td>{{ $data->ppol ?? "" }}</td>
                                 <td>{{ $data->rendemen ?? "" }}</td>
                             @elseif($station_id == 3)
                                 <td>{{ $data->analisa_posbrix->spta ?? "" }}</td>

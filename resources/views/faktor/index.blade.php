@@ -38,6 +38,18 @@
                     <input type="number" step="any" class="form-control" name="faktor_pol_saccharomat" value="{{ $faktor->faktor_pol_saccharomat }}" required>
                 </p>
                 <p>
+                    <label>{{ strtoupper("faktor_rendemen_ari") }}</label>
+                    <input type="number" step="any" class="form-control" name="faktor_rendemen_ari" value="{{ $faktor->faktor_rendemen_ari }}" required>
+                </p>
+                <p>
+                    <label>{{ strtoupper("faktor_mellase_ari") }}</label>
+                    <input type="number" step="any" class="form-control" name="faktor_mellase_ari" value="{{ $faktor->faktor_mellase_ari }}" required>
+                </p>
+                <p>
+                    <label>{{ strtoupper("faktor_pol_saccharomat_ari") }}</label>
+                    <input type="number" step="any" class="form-control" name="faktor_pol_saccharomat_ari" value="{{ $faktor->faktor_pol_saccharomat_ari }}" required>
+                </p>
+                <p>
                     <label>{{ ucfirst("diperbarui oleh") }}</label>
                     <input type="text" step="any" class="form-control" value="{{ $faktor->user->name }}" readonly>
                 </p>

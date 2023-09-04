@@ -45,8 +45,8 @@
                             <td>{{ $analisa_core->analisa_posbrix->spta }}</td>
                             <td>{{ $analisa_core->analisa_posbrix->barcode_antrian }}</td>
                             <td>{{ $analisa_core->analisa_posbrix->register }}</td>
-                            <td>{{ $analisa_core->brix }}</td>
-                            <td>{{ $analisa_core->pol }}</td>
+                            <td>{{ $analisa_core->pbrix }}</td>
+                            <td>{{ $analisa_core->ppol }}</td>
                             <td>{{ $analisa_core->rendemen }}</td>
                             <td>{{ $analisa_core->user->name }}</td>
                             <td>

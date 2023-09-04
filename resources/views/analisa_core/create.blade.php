@@ -30,8 +30,12 @@
                     <input type="text" step="any" class="form-control" name="rfid" maxlength="10" autofocus required>
                 </p>
                 <p>
-                    <label>{{ ucfirst("brix") }}</label>
-                    <input type="number" step="any" class="form-control" name="brix" min="5" max="23" required>
+                    <label>{{ ucfirst("pbrix") }}</label>
+                    <input type="number" step="any" class="form-control" name="pbrix" min="5" max="23" required>
+                </p>
+                <p>
+                    <label>{{ ucfirst("ppol") }}</label>
+                    <input type="number" step="any" class="form-control" name="ppol" min="5" max="23" required>
                 </p>
                 <p>
                     <label>{{ ucfirst("pol") }}</label>

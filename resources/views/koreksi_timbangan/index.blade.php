@@ -20,7 +20,7 @@
             <form action="{{ route("koreksi_timbangan.process") }}" method="post">
                 @csrf
                 <p>
-                    <label>{{ ucfirst("tanngal") }}</label>
+                    <label>{{ ucfirst("tanggal") }}</label>
                     <input type="date" step="any" class="form-control" value="" name="date" autofocus required>
                 </p>
                 <p>

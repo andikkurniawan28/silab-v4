@@ -20,6 +20,9 @@ return new class extends Migration
             $table->float('faktor_mellase_npp')->default(0.4);
             $table->float('faktor_analisa_ampas')->default(0.0);
             $table->float('faktor_pol_saccharomat')->default(0.0);
+            $table->float('faktor_rendemen_ari')->default(0.0);
+            $table->float('faktor_mellase_ari')->default(0.0);
+            $table->float('faktor_pol_saccharomat_ari')->default(0.0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

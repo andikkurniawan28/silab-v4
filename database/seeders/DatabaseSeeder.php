@@ -589,10 +589,13 @@ class DatabaseSeeder extends Seeder
         $faktors = [
             [
                 "user_id" => 1,
+                "faktor_analisa_ampas" => 0,
                 "faktor_rendemen_npp" => 0.7,
                 "faktor_mellase_npp" => 0.4,
-                "faktor_analisa_ampas" => 0,
                 "faktor_pol_saccharomat" => 0,
+                "faktor_rendemen_ari" => 0,
+                "faktor_mellase_ari" => 0,
+                "faktor_pol_saccharomat_ari" => 0,
             ]
         ];
         Faktor::insert($faktors);

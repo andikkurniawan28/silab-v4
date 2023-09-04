@@ -1,0 +1,1 @@
+<th>{{ ucfirst("brix") }}</th>

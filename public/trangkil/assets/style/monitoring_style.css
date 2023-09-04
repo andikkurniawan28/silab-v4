@@ -1,0 +1,228 @@
+    @charset "utf-8";
+    /* CSS Document*/
+    body{
+        background-color:#ffffff;
+        margin:0px;
+        padding:0px;
+    }
+    
+    ul{
+        list-style:none;
+    }
+    
+    a{
+        text-decoration:none;
+    }
+    
+    section{
+        width:100%;
+        height:100%;
+        position: relative;
+    }
+    
+    nav{
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        height:100%;
+        background-color:#FFFFFF;
+        box-shadow:2px 2px 12px rgba(0,0,0,0.2);
+        padding:0px 2%;
+    
+    }
+    nav ul{
+        display: flex;
+    }
+    
+    nav ul li a{
+        margin:5px;
+        font-family:myriad pro regular;
+        color:#505050;
+        font-size: 14px;
+        font-weight:600;
+    }
+    
+    .logo{
+        font-family:RoadTest;
+        color:#000000;
+        font-size: 18px;
+        font-weight:bold;
+    }
+    
+    .active{
+        color:#2d2a2a;
+        font-weight:bold;
+    }
+    
+    
+    .services{
+        height:100%;
+        position: relative;
+        background-color:#f6f5f5;
+        padding: 1% 0px 0px 0px;
+    }
+    
+    .services-text p:nth-child(1){
+        font-family: calibri;
+        font-weight:bold;
+        color:#1d1c1c;
+        font-size:30px;
+        line-height:0px;
+        text-align: center;
+    }
+    
+    .services-text p:nth-child(2){
+        font-family:calibri;
+        color:#7e7d7d;
+    
+    }
+    
+    .services-text{
+        margin:20px 0px;
+    }
+    
+    .box-container{
+        display:flex;
+    }
+    
+    .box-3{
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        display: flex;
+        flex-direction: column;
+        margin: 0px 0px;
+        margin-left:30px;
+    
+    }
+    
+    .box-2{
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        display: flex;
+        flex-direction: column;
+        margin: 0px 0px;
+        margin-left:30px;
+    }
+    .box-6{
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        display: flex;
+        margin: 0px 0px;
+        margin-left:30px;
+    
+    }
+    
+    .testimoni{
+        height:100%;
+        position: relative;
+        background-color:#ffffff;
+        padding: 1% 0px 0px 0px;
+    }
+    
+    
+    footer p{
+        font-family: calibri;
+    }
+    
+    footer p:nth-child(1){
+        font-size: 30px;
+        font-weight:bold;
+        color:#FFFFFF;
+        line-height:10px;
+    }
+    
+    footer p:nth-child(2){
+        font-size: 16px;
+        color:#7e7d7d;
+        width:100%;
+        text-align: center;
+    }
+    
+    footer{
+        height:60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: #191919;
+    }
+    
+    .social-icons a{
+        width:40px;
+        height:40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color:#e6e3e3;
+        margin:20px 10px;
+        border-radius:50%;
+    }
+    
+    .social-icons{
+        display: flex;
+    
+    }
+    
+    .social-icons i,.social i{
+        color:#000000;
+    }
+    
+    .social-icons a:hover{
+        background-color:#000000;
+        box-shadow:2px 2px 12px rgba(0,0,0,0.2);
+        transition:all ease 0.5s;
+    }
+    
+    
+    .social-icons a:hover i,
+    .social a:hover i{
+        color:#FFFFFF;
+        transition:all ease 0.5s;
+    }
+    
+    .copyright{
+        color:#565555;
+        font-size:12px;
+        position: absolute;
+        left:50%;
+        transform: translateX(-50%);
+        justify-content: center;
+    }
+    .social{
+        position: fixed;
+        top:50%;
+        right:0px;
+        transform:translateY(-50%);
+    }
+    
+    .social a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width:50px;
+        height:50px;
+        margin:0px;
+        padding: 0px;
+        line-height:0px;
+        background-color:#FFFFFF;
+        border:1px solid #CBCBCB;
+        box-shadow:2px 2px 12px rgba(0,0,0,0.2);
+    }
+    
+    .social a:hover{
+        background-color:#000000;
+        transition:all ease 0.5s;
+    }
+    
+    .social i{
+        font-size:20px;
+        color:#2B2B2B;
+    }
+    

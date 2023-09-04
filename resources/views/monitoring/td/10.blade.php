@@ -1,0 +1,1 @@
+<td>{{ $analysis->pbrix }}</td>

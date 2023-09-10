@@ -16,16 +16,16 @@ return new class extends Migration
         Schema::create('analisa_posbrixes', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained();
-            $table->foreignId("posbrix_id")->constrained();
-            $table->foreignId("kawalan_id")->constrained();
-            $table->foreignId("variety_id")->constrained();
-            $table->foreignId("status_id")->constrained();
+            $table->foreignId("posbrix_id")->nullable()->constrained();
+            $table->foreignId("kawalan_id")->nullable()->constrained();
+            $table->foreignId("variety_id")->nullable()->constrained();
+            $table->foreignId("status_id")->nullable()->constrained();
             $table->foreignId("kud_id")->nullable()->constrained();
             $table->foreignId("pospantau_id")->nullable()->constrained();
             $table->foreignId("wilayah_id")->nullable()->constrained();
             $table->string("petani")->nullable();
             $table->string("spta")->unique();
-            $table->integer("brix");
+            $table->integer("brix")->nullable();
             $table->string("barcode_antrian")->unique()->nullable();
             $table->string("register")->nullable();
             $table->string("nopol")->nullable();

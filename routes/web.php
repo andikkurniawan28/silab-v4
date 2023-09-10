@@ -12,6 +12,7 @@ use App\Http\Controllers\MethodController;
 use App\Http\Controllers\OnFarmController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\SuksesController;
 use App\Http\Controllers\AriCardController;
 use App\Http\Controllers\BalanceController;
 use App\Http\Controllers\KawalanController;
@@ -26,7 +27,6 @@ use App\Http\Controllers\AplikasiController;
 use App\Http\Controllers\CariDataController;
 use App\Http\Controllers\ChemicalController;
 use App\Http\Controllers\CoreCardController;
-use App\Http\Controllers\ImbibisiController;
 use App\Http\Controllers\KartuAriController;
 use App\Http\Controllers\KelilingController;
 use App\Http\Controllers\MaterialController;
@@ -56,26 +56,14 @@ use App\Http\Controllers\ReportOffFarmController;
 use App\Http\Controllers\AnalisaBlotongController;
 use App\Http\Controllers\AnalisaPosbrixController;
 use App\Http\Controllers\AnalisaSulphurController;
-use App\Http\Controllers\AplikasiTapAriController;
-use App\Http\Controllers\FlowNiraMentahController;
-use App\Http\Controllers\InputColoromatController;
 use App\Http\Controllers\RawsugaroutputController;
-use App\Http\Controllers\InputAnalisaUmumController;
-use App\Http\Controllers\InputSaccharomatController;
+use App\Http\Controllers\KoreksiRendemenController;
+use App\Http\Controllers\KoreksiTimbanganController;
 use App\Http\Controllers\MonitoringOnFarmController;
 use App\Http\Controllers\RendemenNppAcuanController;
 use App\Http\Controllers\AnalisaCoreSampleController;
-use App\Http\Controllers\InputAnalisaAmpasController;
-use App\Http\Controllers\InputAnalisaKetelController;
-use App\Http\Controllers\InputAnalisaKhususController;
 use App\Http\Controllers\LaporanMandorOnFarmController;
-use App\Http\Controllers\AplikasiPersiapanAriController;
-use App\Http\Controllers\InputAnalisaRendemenController;
-use App\Http\Controllers\AplikasiTapCoreSampleController;
 use App\Http\Controllers\CetakBarcodeByCategoryController;
-use App\Http\Controllers\AplikasiPersiapanCoreSampleController;
-use App\Http\Controllers\KoreksiRendemenController;
-use App\Http\Controllers\KoreksiTimbanganController;
 
 // Auth
 Route::get("login", [AuthController::class, "login"])->name("login");
@@ -88,8 +76,14 @@ Route::get("logout", [AuthController::class, "logout"])->name("logout");
 Route::get("select_date", [AuthController::class, "selectDate"])->name("select_date")->middleware(["auth"]);;
 Route::post("select_date", [AuthController::class, "selectDateProcess"])->name("select_date.process")->middleware(["auth"]);
 
+// Home & Dashboard
 Route::get("/", HomeController::class)->name("home")->middleware(["auth"]);
 Route::get("dashboard", DashboardController::class)->name("dashboard")->middleware(["auth", "date_is_stated"]);
+
+// Monitoring
+Route::get("monitoring-perstation/{station_id}", [MonitoringController::class, "perStation"])->name("monitoring.perStation")->middleware(["auth", "date_is_stated"]);
+Route::get("monitoring-permaterial/{material_id}", [MonitoringController::class, "perMaterial"])->name("monitoring.perMaterial")->middleware(["auth", "date_is_stated"]);
+Route::get("monitoring-onfarm/{station_id}", [MonitoringOnFarmController::class, "index"])->name("monitoring.onfarm")->middleware(["auth", "date_is_stated"]);
 
 // Off Farm
 Route::resource("role", RoleController::class)->middleware(["auth", "user_is_admin"]);
@@ -119,10 +113,10 @@ Route::get("cetak_barcode/{station_id}", [CetakBarcodeByCategoryController::clas
 Route::post("cetak_barcode", [CetakBarcodeByCategoryController::class, "store"])->name("cetak_barcode.store")->middleware(["auth", "user_is_off_farm"]);
 Route::get("cetak_ronsel", [CetakRonselController::class, "index"])->name("cetak_ronsel")->middleware(["auth", "user_is_non_qc"]);
 Route::post("cetak_ronsel", [CetakRonselController::class, "store"])->name("cetak_ronsel.store")->middleware(["auth", "user_is_non_qc"]);
-Route::get("monitoring-perstation/{station_id}", [MonitoringController::class, "perStation"])->name("monitoring.perStation")->middleware(["auth", "date_is_stated"]);
-Route::get("monitoring-permaterial/{material_id}", [MonitoringController::class, "perMaterial"])->name("monitoring.perMaterial")->middleware(["auth", "date_is_stated"]);
-Route::get("monitoring-onfarm/{station_id}", [MonitoringOnFarmController::class, "index"])->name("monitoring.onfarm")->middleware(["auth", "date_is_stated"]);
+Route::get("koreksi_timbangan", [KoreksiTimbanganController::class, "index"])->name("koreksi_timbangan")->middleware(["auth", "user_is_staff"]);
+Route::post("koreksi_timbangan", [KoreksiTimbanganController::class, "process"])->name("koreksi_timbangan.process")->middleware(["auth", "user_is_staff"]);
 
+// On Farm
 Route::resource("posbrix", PosbrixController::class)->middleware(["auth", "user_is_staff"]);
 Route::resource("kawalan", KawalanController::class)->middleware(["auth", "user_is_staff"]);
 Route::resource("variety", VarietyController::class)->middleware(["auth", "user_is_staff"]);
@@ -143,25 +137,21 @@ Route::resource("scoring", ScoringController::class)->middleware(["auth", "date_
 Route::resource("rendemen_npp_acuan", RendemenNppAcuanController::class)->middleware(["auth", "user_is_staff"]);
 Route::resource("rafaksi_value", RafaksiValueController::class)->middleware(["auth", "user_is_staff"]);
 Route::resource("faktor", FaktorController::class)->middleware(["auth", "user_is_staff"]);
-
+Route::resource('kartu_core', KartuCoreController::class)->middleware(["auth", "user_is_on_farm"]);
+Route::resource('kartu_ari', KartuAriController::class)->middleware(["auth", "user_is_on_farm"]);
+Route::get("cari_data", [CariDataController::class, "index"])->name("cari_data")->middleware(["auth", "user_is_on_farm"]);
+Route::post("cari_data", [CariDataController::class, "process"])->name("cari_data.process")->middleware(["auth", "user_is_on_farm"]);
 Route::get("analisa_posbrix/create/{posbrix_id}", [OnFarmController::class, "analisaPosbrix"])->name("on_farm.analisa_posbrix")->middleware(["auth", "user_is_on_farm"]);
 Route::get("core_sampling/create/{core_id}", [OnFarmController::class, "coreSampling"])->name("on_farm.core_sampling")->middleware(["auth", "user_is_on_farm"]);
 Route::get("ari_sampling/create/{timbang_id}", [OnFarmController::class, "ariSampling"])->name("on_farm.ari_sampling")->middleware(["auth", "user_is_on_farm"]);
-
-Route::get("cari_data", [CariDataController::class, "index"])->name("cari_data")->middleware(["auth", "user_is_on_farm"]);
-Route::post("cari_data", [CariDataController::class, "process"])->name("cari_data.process")->middleware(["auth", "user_is_on_farm"]);
-
 Route::get("koreksi_rendemen", [KoreksiRendemenController::class, "index"])->name("koreksi_rendemen")->middleware(["auth", "user_is_staff"]);
 Route::post("koreksi_rendemen", [KoreksiRendemenController::class, "process"])->name("koreksi_rendemen.process")->middleware(["auth", "user_is_staff"]);
-Route::get("koreksi_timbangan", [KoreksiTimbanganController::class, "index"])->name("koreksi_timbangan")->middleware(["auth", "user_is_staff"]);
-Route::post("koreksi_timbangan", [KoreksiTimbanganController::class, "process"])->name("koreksi_timbangan.process")->middleware(["auth", "user_is_staff"]);
 
-Route::resource('kartu_core', KartuCoreController::class)->middleware(["auth", "user_is_on_farm"]);
-Route::resource('kartu_ari', KartuAriController::class)->middleware(["auth", "user_is_on_farm"]);
-
+// Report
 Route::get("report_off_farm", [ReportOffFarmController::class, "index"])->name("report_off_farm")->middleware(["auth", "date_is_stated", "user_is_off_farm"]);
 Route::get("laporan_mandor/{shift}", [LaporanMandorController::class, "index"])->name("laporan_mandor")->middleware(["auth", "date_is_stated", "user_is_off_farm"]);
 Route::get("laporan_mandor_on_farm/{shift}", [LaporanMandorOnFarmController::class, "index"])->name("laporan_mandor_on_farm")->middleware(["auth", "date_is_stated", "user_is_on_farm"]);
 
+// API PDE
 Route::get("aplikasi/get_antrian/{barcode_antrian}", [AplikasiController::class, "getAntrian"])->name("aplikasi.get_antrian")->middleware(["auth", "user_is_admin"]);
 Route::get("aplikasi/get_rfid/{rfid}", [AplikasiController::class, "getRfid"])->name("aplikasi.get_rfid")->middleware(["auth", "user_is_admin"]);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Core;
+use App\Models\Timbang;
 use App\Models\Config;
 use App\Models\AriCard;
 use Illuminate\Http\Request;

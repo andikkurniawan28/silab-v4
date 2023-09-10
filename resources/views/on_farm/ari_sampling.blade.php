@@ -22,14 +22,6 @@
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Auth()->user()->id }}">
                 <input type="hidden" name="timbang_id" value="{{ $timbang->id }}">
-                {{-- <p>
-                    <label>{{ strtoupper("spta") }}</label>
-                    <input type="text" step="any" class="form-control" name="data" maxlength="8" autofocus required>
-                </p>
-                <p>
-                    <label>{{ strtoupper("rfid") }}</label>
-                    <input type="text" step="any" class="form-control" name="data" maxlength="10" autofocus required>
-                </p> --}}
                 <p>
                     <label>{{ ucfirst("barcode antrian") }}</label>
                     <input type="text" step="any" class="form-control" name="data" maxlength="10" autofocus required>

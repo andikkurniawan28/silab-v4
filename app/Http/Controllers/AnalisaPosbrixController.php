@@ -107,13 +107,9 @@ class AnalisaPosbrixController extends Controller
      */
     public function update(Request $request, $id)
     {
-        AnalisaPosbrix::whereId($id)->update([
-            "spta" => $request->spta,
-            "posbrix_id" => $request->posbrix_id,
-            "kawalan_id" => $request->kawalan_id,
-            "variety_id" => $request->variety_id,
-            "brix" => $request->brix,
-        ]);
+        AnalisaPosbrix::whereId($id)->update($request->except([
+            "_method", "_token",
+        ]));
         return redirect()->route("analisa_posbrix.index")->with("success", "Analisa Posbrix berhasil dirubah.");
     }
 

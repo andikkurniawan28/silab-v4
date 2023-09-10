@@ -4,10 +4,11 @@
 <div class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h4 class="m-0 font-weight-bold text-primary">{{ "Home" }}</h4>
-        <a href="{{ route("report_off_farm") }}" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm">
-            <i class="fas fa-print fa-sm text-white-50"></i> Laporan Harian</a>
+        <h4 class="m-0 font-weight-bold text-primary">Hallo, selamat datang {{ Auth()->user()->name }} &#128521</h4>
+        {{-- <a href="{{ route("report_off_farm") }}" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm">
+            <i class="fas fa-print fa-sm text-white-50"></i> Laporan Harian</a> --}}
     </div>
+    {{-- <p>Tetap semangat jangan sambat &#128521</p> --}}
     @include("layouts.alert")
     <div class="row">
 

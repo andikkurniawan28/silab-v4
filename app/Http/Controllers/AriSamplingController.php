@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\AnalisaPosbrix;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AplikasiController;
-// use App\Http\Requests\AriSamplingStoreRequest;
 
 class AriSamplingController extends Controller
 {
@@ -47,41 +46,39 @@ class AriSamplingController extends Controller
      */
     public function store(Request $request)
     {
-        // Hitung kartu yang tersedia
-        $count_card = self::countCard();
-
-        // Panggil API PDE
-        $resource = AplikasiController::getAntrian($request->data);
-
-        // Cari ID dari Analisa Posbrix berdasarkan SPTA dari API PDE
-        $id = self::getId($resource);
-
-        // Cek state
-        $state = self::checkState($count_card, $id);
-
-        // Jika benar
-        if($state === TRUE){
-
-            // Ambil data kartu secara FIFO
-            $card = self::getCardFifo();
-
-            // Simpan record
-            self::save($id, $card, $request);
-
-            // Bersihkan kartu yang telah digunakan
-            self::clear($card);
-
-            // Update Analisa Posbrix berdasarkan API dari PDE
-            self::updatePosbrix($id, $resource);
-
-            // Selesai
-            return redirect()->back()->with("success", "Ari Sampling berhasil disimpan.");
+        if($request->has("timbang_id")){
+            $timbang_id = $request->timbang_id;
         }
-        // Jika salah
-        else
+
+        $count_card     = self::countCard();
+        $resource       = AplikasiController::getAntrian($request->data);
+        $id             = self::getId($resource);
+        $state          = self::checkState($count_card, $id);
+
+        if(AriSampling::where("analisa_posbrix_id", $id)->count("id") != 0){
+            $message = "Truk sudah terdaftar!";
+            return self::gagalSimpan($timbang_id, "Sudah Scan!");
+        }
+        if($state === 1){
+            $card = self::getCardFifo();
+            self::save($id, $card, $request);
+            self::clear($card);
+            self::updatePosbrix($id, $resource);
+            return self::sukses($timbang_id, "Posbrix ditemukan, integrasi sukses!");
+        }
+        elseif($state === 2)
         {
-            // Error
-            return redirect()->back()->with("success", "Error : Gagal simpan!");
+            $message = "Kartu sampel belum siap!";
+            return self::gagalSimpan($timbang_id, "Kartu sampel belum siap!");
+        }
+        elseif($state === 3)
+        {
+            self::createPosbrix($resource);
+            $analisa_posbrix_id = AnalisaPosbrix::where("barcode_antrian", $resource["barcode_antrian"])->get()->last()->id;
+            $card = self::getCardFifo();
+            self::save($analisa_posbrix_id, $card, $request);
+            self::clear($card);
+            return self::sukses($timbang_id, "Posbrix tidak ditemukan, membuat Posbrix kosongan. Hubungi petugas Posbrix!");
         }
     }
 
@@ -148,12 +145,12 @@ class AriSamplingController extends Controller
 
     public static function checkState($count_card, $id){
         if($count_card == 0){
-            return FALSE;
+            return 2;
         }
         if($id == NULL){
-            return FALSE;
+            return 3;
         }
-        return TRUE;
+        return 1;
     }
 
     public static function getCardFifo(){
@@ -188,13 +185,35 @@ class AriSamplingController extends Controller
 
     public static function updatePosbrix($id, $resource){
         AnalisaPosbrix::whereId($id)->update([
-            "barcode_antrian" => $resource["barcode_antrian"],
-            "register" => $resource["register"],
-            "nopol" => $resource["nopol"],
-            "petani" => $resource["nama_petani"],
-            "kud_id" => $resource["kud_id"],
-            "pospantau_id" => $resource["pospantau_id"],
-            "wilayah_id" => $resource["wilayah_id"],
+            "barcode_antrian"   => $resource["barcode_antrian"],
+            "register"          => $resource["register"],
+            "nopol"             => $resource["nopol"],
+            "petani"            => $resource["nama_petani"],
+            "kud_id"            => $resource["kud_id"],
+            "pospantau_id"      => $resource["pospantau_id"],
+            "wilayah_id"        => $resource["wilayah_id"],
         ]);
+    }
+
+    public static function createPosbrix($resource){
+        AnalisaPosbrix::insert([
+            "spta"              => $resource["spta"],
+            "barcode_antrian"   => $resource["barcode_antrian"],
+            "register"          => $resource["register"],
+            "nopol"             => $resource["nopol"],
+            "petani"            => $resource["nama_petani"],
+            "kud_id"            => $resource["kud_id"],
+            "pospantau_id"      => $resource["pospantau_id"],
+            "wilayah_id"        => $resource["wilayah_id"],
+            "user_id"           => 1,
+        ]);
+    }
+
+    public static function sukses($timbang_id, $message){
+        return view("ari_sampling.sukses", compact("timbang_id", "message"));
+    }
+
+    public static function gagalSimpan($timbang_id, $message){
+        return view("ari_sampling.gagal_simpan", compact("timbang_id", "message"));
     }
 }

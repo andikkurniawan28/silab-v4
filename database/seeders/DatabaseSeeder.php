@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             ["name" => "Operator Off Farm"],    // 8
             ["name" => "Mandor On Farm"],       // 9
             ["name" => "Operator On Farm"],     // 10
-            ["name" => "Operator Non QC"],      // 11
+            ["name" => "Non QC"],               // 11
             ["name" => "User 1"],               // 12
             ["name" => "User 2"],               // 13
         ];
@@ -472,14 +472,14 @@ class DatabaseSeeder extends Seeder
        ];
        Wilayah::insert($wilayahs);
 
-       $analisa_posbrix = [
-            ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231517", "status_id" => 1],
-            ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231516", "status_id" => 1],
-            ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231701", "status_id" => 1],
-            ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231699", "status_id" => 1],
-            ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231756", "status_id" => 1],
-       ];
-       AnalisaPosbrix::insert($analisa_posbrix);
+    //    $analisa_posbrix = [
+    //         ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231517", "status_id" => 1],
+    //         ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231516", "status_id" => 1],
+    //         ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231701", "status_id" => 1],
+    //         ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231699", "status_id" => 1],
+    //         ["user_id" => 1, "posbrix_id" => 1, "kawalan_id" => 1, "variety_id" => 1, "brix" => rand(15, 17), "spta" => "08231756", "status_id" => 1],
+    //    ];
+    //    AnalisaPosbrix::insert($analisa_posbrix);
 
        $core_card = [
             ["user_id" => 1, "core_id" => 1, "rfid" => "1234567890"],
